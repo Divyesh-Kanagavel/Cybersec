@@ -1,0 +1,42 @@
+The book Hacking the Art of Exploitation assumes the availability of x86 intel based processor and the assembly instructions , commands are relevant to that architecture.
+But the walk through of the code examples and material in the book is performed on a Mac m2 PC with ARM64 based architecture => different set of assembly instructions.
+Another fundamental difference is that the x86 processor c code and assembly is compiled, debugged using gcc compiler and gdb , whereas in this pc, clang compiler + lldb debugger is used [part of llvm project]
+
+Hence the difference in commands , assembly dumps and their explanations will be stored in this file.
+
+In arm64 , unlike intel x86 syntax, the operand is on the left
+Example:
+mul x8, x1,x1 -> this multiplies the values in the register x1 and puts in the register x8.
+
+The gdb -q a.out command used in the book to view the assembly dump for the firstprog.c , set breakpoints etc
+Similar command for lldb is lldb -- firstprog q , and to set breakpoint at main , b main and to run, it is the same command run
+
+ARM64 assembly basics:
+
+There are 31 General purpose registers : variables of assembly language [x0 - x30]
+To refer to their lower bit registers : w0 to w30
+Dedicated stack pointer : sp
+
+
+X30 - link register - contains the return pointer .i.e after completion of a routine, to what location should the instruction pointer point to
+
+Some important instructions;
+Mul, mov, bl, b, madd, add Ldp [load a pair of registers] , ldr [load a register], stp[store pair of registers], str [store a register]
+
+Important links : 
+https://developer.arm.com/documentation/102374/0101/Function-calls
+https://wolchok.org/posts/how-to-read-arm64-assembly-language/#:~:text=ARM64%20has%2031%20general%2Dpurpose,names%20is%20on%20ARM%27s%20website.
+
+In gdb, while running in debug mode, the command disassemble followed by frame like main will give you the assembly dump of the function, the same can be done in lldb using disassemble --name main.
+
+Xzr /wzr register -  a register containing zero as value ,useful in places where all zero value is to be passed or used.
+
+In the gdb, info registers will give information on the memory locations of all registers whereas for lldb, we need to get the values from register read.
+Just like the command x/x or x/o depending on the data format you want, the command is the same in lldb as well.
+In x86 instruction set, we have the instruction pointer (rip) which can be used to determine the location currently being pointer at. In ARM64, there is no direct correspondence, but the pc register points to the instruction
+Currently being pointed at . [but ARM being RISC has certain limitations and hence exact one to one mapping between x86 [CISC] and ARM is not always possible.
+
+Just like in x86, the bytes are stored in little endian order - least significant byte is stored first ,  ARM 64 also has little endian order .
+
+X/I : examine/instruction command is also used to check the assembly language instruction being implemented at that location.
+
