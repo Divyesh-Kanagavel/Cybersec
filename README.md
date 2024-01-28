@@ -1,2 +1,2 @@
 # Cybersec
-Tutorials, experiments with cybersecurity
+A walk through of various cybersecurity resources, tutorials, courses
