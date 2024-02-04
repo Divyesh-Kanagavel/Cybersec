@@ -40,3 +40,21 @@ Just like in x86, the bytes are stored in little endian order - least significan
 
 X/I : examine/instruction command is also used to check the assembly language instruction being implemented at that location.
 
+Some important ARM assembly registers and the instructions found in the simple firstprog.c code:
+
+Str war, [sp,#08] store the value in the source register to the address pointed sp+8 , here the offset which can be given to stack pointer are multiples of 4 32 bit systems and 8 for 64 bit systems. To give other unscaled offsets
+Stur is used : store unscaled register. Here 
+Stur war, x29,-#0x04 is used, not a multiple of 8 , but still can be used as offset.
+
+Subs : 
+Is a variant of sub :
+Sub sp, sp, #0x20 .the usual binary operation in arm assembly is that the first sp-0X20 is performed and then that value is stored in sp. In subs in addition, registers like C(carry,unsigned overflow), Z(zero), V(signed overflow), N(Negative) are set.
+Depending on the value of these registers flag registers like e , ge, le, l, g etc are set [equal, less or equal, greater or equal, greater] etc are set.
+
+Cset : condition set sets the conditional flag value to the register
+Cset w8, ge
+
+Tbnz : test bit and branch if non-zero . Compares the value in the register to zero and if they are not equal, branches to given address.
+Adrp - moves the address pointer by a register to another page max being 4GB since most of the module size max is 4GB, this way global variable on another page can be accessed by this instruction.
+X0 and w0 [in fact x0-x7 and w0-w7 are registers which store return values.
+
