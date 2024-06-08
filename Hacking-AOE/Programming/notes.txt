@@ -1,0 +1,17 @@
+Compiled program memory -> text, bss, stack, heap, data
+text segment represents the portion which has the code -> contains the assembly instructions
+it is read only segment of the memory - advantage - no changes in code from the user and its multiple copies can be shared to different executions of the program
+fixed size.
+
+data & bss - store global and static variables
+data - initialized global and static variables
+bss - uninitialized global and static variables
+global and static variables persist because they are allocated in their own memory regions
+heap segment - directly controllable by the programmer. variable size. can shrink or expand depending on programmer's requirements
+allocated and deallocated by algorithms. moves downward to higher addresses
+
+stack segment - variable size - contains local function variables and context calls
+this is looked at by GDB's backtrace - contains many stack frames- FILO First In Last Out ordering.
+Stack pointer keeps track of the end of stack. it moves towards lower memory addresses.
+
+
