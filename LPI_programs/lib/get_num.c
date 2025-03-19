@@ -27,7 +27,7 @@ static long getNum(const char* fname, const char* arg, int flags, const char* na
     char* endptr;
     int base;
     
-    if ((arg == NULL) || (*arg!='\0'))
+    if ((arg == NULL) || (*arg=='\0'))
     {
         gnFail(fname, "null or empty string", arg, name);
     }
